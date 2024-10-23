@@ -9,8 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import ru.kata.spring.boot_security.demo.Model.User;
 import ru.kata.spring.boot_security.demo.repository.UserRepository;
 
-import java.util.Optional;
-
 @Service
 public class RoleInUserDetails implements UserDetailsService {
 
