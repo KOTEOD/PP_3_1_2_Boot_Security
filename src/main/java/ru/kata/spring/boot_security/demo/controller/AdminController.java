@@ -2,7 +2,6 @@ package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.Model.Goods;
@@ -37,7 +36,6 @@ public class AdminController {
         model.addAttribute("authUser", user);
         model.addAttribute("users", userService.getAllUser());
         model.addAttribute("roles", roleService.getAllRoles());
-        model.addAttribute("goodsAll",goodsService.getAllGoods());
         model.addAttribute("newGoods", new Goods());
         model.addAttribute("newUser", new User());
         return "admin";

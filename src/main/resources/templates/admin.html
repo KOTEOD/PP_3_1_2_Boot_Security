@@ -36,6 +36,7 @@
     <div class="col-2">
         <div class="nav nav-tabs flex-column nav-pills me-3" role=tablist>
             <a class="nav-link active" href="#admin" role="tab" data-toggle="tab">Admin</a>
+            <a class="nav-link" href="#user" role="tab" data-toggle="tab">User</a>
             <a class="nav-link" href="#goods" role="tab" data-toggle="tab">Goods</a>
         </div>
 
@@ -74,7 +75,7 @@
                             <tbody th:each="user: ${users}">
                             <td th:utext="${user.getId()}"></td>
                             <td th:utext="${user.getUsername()}">Name</td>
-                            <td th:utext="${user.getEmail()}">Email</td>
+                            <td th:utext="${user.getEmail()}">Email()</td>
 
 
                             <td>
@@ -276,7 +277,7 @@
                             <div clinstass="card-header">
                                 <h2 class="text-center">Add new Products</h2>
                             </div>
-                            <form id="goodsNew" th:method="POST" th:action="@{/admin/add}"
+                            <form id="goodsNew" th:method="POST" th:action="@{/admin}"
                                   th:object="${newGoods}">
                             <div class="mb-3">
                                 <label for="nameNew" class="form-label">Name</label>
@@ -311,7 +312,37 @@
                         </div>
                     </div>
                 </div>
+
             </div>
+        </div>
+
+        <div role="tabpanel" class="tab-pane " id="user">
+            <div class="d-flex align-content-center flex-wrap" style="height: 100px">
+                <h1 class="display-3">User information-page</h1>
+            </div>
+            <table class="table table-striped table-bordered table-hover caption-top">
+                <caption><p class="fw-bold">About user</p></caption>
+                <thead class="table-dark">
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Surname</th>
+                    <th>Age</th>
+                    <th>Roles</th>
+                </tr>
+                </thead>
+                <tbody>
+                <td th:utext="${authUser.getId()}">Id</td>
+                <td th:utext="${authUser.getUsername()}">Name</td>
+                <td th:utext="${authUser.getEmail()}">Surname</td>
+                <td>
+                    <div th:each="role : ${authUser.getRoles()}">
+                        <div th:text="${role.getRoleNameWithoutPrefix()}">user</div>
+                    </div>
+                </td>
+                </tbody>
+            </table>
+
         </div>
 
         <div role="tabpanel" class="tab-pane fade" id="goods">
@@ -332,21 +363,22 @@
                     <th>Delete</th>
                 </tr>
                 </thead>
-                    <tbody th:each="goods : ${goodsAll}">
-                    <td th:text="${goods.getId()}">Id</td>
-                    <td th:text="${goods.getName()}">Name</td>
-                    <td th:text="${goods.getProducerGoods()}">Producer</td>
-                    <td th:text="${goods.getSection()}">Section</td>
-                    <td th:text="${goods.getPrice()}">Price</td>
-                    <td th:text="${goods.getDeliveryDate()}">Delivery Date</td>
+                <tbody th:each="goods : ${goods}">
+                <tr>
+                    <td th:text="${goods.id}">1</td>
+                    <td th:text="${goods.name}">Name</td>
+                    <td th:text="${goods.producerGoods}">Producer</td>
+                    <td th:text="${goods.section}">Section</td>
+                    <td th:text="${goods.price}">Price</td>
+                    <td th:text="${goods.deliveryDate}">Delivery Date</td>
                     <td>
                         <button class="btn btn-info" data-toggle="modal"
-                                th:data-target="${'#editGoodsModal' + goods.getId()}">Edit
+                                th:data-target="${'#editGoodsModal' + goods.id}">Edit
                         </button>
                     </td>
                     <td>
                         <button class="btn btn-danger" data-toggle="modal"
-                                th:data-target="${'#deleteGoodsModal' + goods.getId}">Delete
+                                th:data-target="${'#deleteGoodsModal' + goods.id}">Delete
                         </button>
                     </td>
                 </tr>
